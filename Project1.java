@@ -1,4 +1,3 @@
-package Projects;
 /**
  * Author: Bhagat Sabari Nath
  * Project 1: iStore
