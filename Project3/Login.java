@@ -22,6 +22,7 @@ public class Login {
         passwords[1] = "password2";
         passwords[2] = "password3";
         passwords[3] = "password4";
+        passwords[4] = "---------";
     }
 
     public String login(){
@@ -108,13 +109,13 @@ public class Login {
         }
         System.out.println("Here are the Steps into Creating an Account,"+name+": ");
         System.out.println();
-        System.out.print("Enter a Username: ");
-        String username1 = sc.next();
-        if (username1.equals("0")){
-            return "no";
-        }
-        System.out.println();
         while (true){
+            System.out.print("Enter a Username: ");
+            String username1 = sc.next();
+            if (username1.equals("0")){
+                return "no";
+            }
+            System.out.println();
             System.out.print("Enter a Password: ");
             password = sc.next();
             if (password.equals("0")){
@@ -126,11 +127,33 @@ public class Login {
                 return "no";
             }
             if (cpassword.equals(password)){
-                username[4] = username1;
-                passwords[4] = password;
-                System.out.println("You will be sent to the login page now ");
-                System.out.println();
-                return "ok";
+                String check = "fine";
+                for (int i = 0; i<5;i++){
+                    if (username[i].equals(username1)){
+                        System.out.println("This username already exists in the Database!");
+                        System.out.println("Try Again\n");
+                        check="na";
+                        break;
+                    }
+                }
+                for (int i = 0; i<5;i++){
+                    if (passwords[i].equals(password)){
+                        System.out.println("This password already exists in the Database!");
+                        System.out.println("Try Again\n");
+                        check="na";
+                        break;
+                    }
+                }
+                if (check.equals("na")){
+                    
+                }
+                else{
+                    username[4] = username1;
+                    passwords[4] = password;
+                    System.out.println("You will be sent to the login page now ");
+                    System.out.println();
+                    return "ok";
+                }
             }
             else{
                 System.out.println("The passwords do not match: ");
