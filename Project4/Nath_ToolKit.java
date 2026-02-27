@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.nio.file.*;
 import java.util.List;
 
-public class Login {
+public class Nath_ToolKit {
 JFrame loginFrame;
 JLabel welcome;
 JLabel username;
@@ -20,9 +20,9 @@ JLabel wrongDetails;
 JButton loginButton;
 List<String> listCredential;
     public static void main(String[] args){
-        new Login();
+        new Nath_ToolKit();
     }
-    public Login(){
+    public Nath_ToolKit(){
         int r = 120;
         int g = 199;
         int b = 245;

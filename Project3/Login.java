@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Author: Bhagat Sabari Nath
  */
