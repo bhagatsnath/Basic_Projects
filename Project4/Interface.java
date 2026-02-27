@@ -48,7 +48,7 @@ public class Interface extends Canvas implements ActionListener{
     static JButton UConverter;
     static JButton guessGame;
 
-    public static void main(String[]args){
+    public static void initialize(){
         new Interface();
     }
     public Interface(){
