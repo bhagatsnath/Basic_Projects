@@ -73,7 +73,7 @@ List<String> listCredential;
                 boolean usernameVerified = false;
                 boolean passwordVerified = false;
                 try{
-                    listCredential = Files.readAllLines(Paths.get("data.txt"));
+                    listCredential = Files.readAllLines(Paths.get("project4Data.txt"));
                 }
                 catch(Exception ex){
 
