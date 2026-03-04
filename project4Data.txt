@@ -1,6 +1,3 @@
-bhagat1
-123456
-bhagat2
-999999
-bhagat3
-555555
+Bhagat,bhagat1,123456
+Alice,alice1,999999
+Bob,bob99,555555

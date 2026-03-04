@@ -18,6 +18,7 @@ JLabel password;
 JTextField passwordEnter;
 JLabel wrongDetails;
 JButton loginButton;
+JButton createAccountButton;
 List<String> listCredential;
     public static void main(String[] args){
         new Nath_ToolKit();
@@ -76,19 +77,17 @@ List<String> listCredential;
                     listCredential = Files.readAllLines(Paths.get("project4Data.txt"));
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
-                int i;
-                for (i =0; i<listCredential.size();i=i+2){
-                    if (listCredential.get(i).equals(usernameDetect)){
+                for (int i = 0; i<listCredential.size();i++){
+                    String userDetails = listCredential.get(i);
+                    String[] credentials = userDetails.split(",");
+                    if (credentials[1].equals(usernameDetect)){
                         usernameVerified = true;
-                        break;
-                    }
-                }
-                for (int a =1; a<listCredential.size();a=a+2){
-                    if (listCredential.get(a).equals(passwordDetect)&&a==i+1){
-                        passwordVerified = true;
-                        break;
+                        if (credentials[2].equals(passwordDetect)){
+                            passwordVerified = true;
+                            break;
+                        }
                     }
                 }
                 if (passwordVerified&&usernameVerified){
@@ -102,6 +101,9 @@ List<String> listCredential;
             }
         });
         loginFrame.add(loginButton);
+        //createAccountButton settings and positioning
+        createAccountButton = new JButton("Create an Account");
+        //createAccountButton.setBounds();
         loginFrame.setVisible(true);
     }
 }
