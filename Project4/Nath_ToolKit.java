@@ -25,15 +25,15 @@ List<String> listCredential;
 
 
 //accountCreator Objects
-JLabel nameLabel;
-JLabel name;
 JLabel welcomeForAccountCreator;
+JLabel nameLabel;
+JTextField name;
 JLabel newUsernameLabel;
 JLabel newPasswordLabel;
 JLabel confirmPasswordLabel;
-JLabel newUsername;
-JLabel newPassword;
-JLabel confirmPassword;
+JTextField newUsername;
+JTextField newPassword;
+JTextField confirmPassword;
 JLabel requiredQuestionLabel1;
 JLabel requiredQuestionLabel2;
 JLabel requiredQuestionLabel3;
@@ -131,7 +131,6 @@ JLabel requiredQuestionLabel3;
         createAccountButton.setBounds(135, 200,125,20);
         createAccountButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                loginFrame.setVisible(false);
                 accountCreator.setVisible(true);
             }
         });
@@ -162,7 +161,28 @@ JLabel requiredQuestionLabel3;
        newPasswordLabel = new JLabel("Enter a new Password");
        newPasswordLabel.setBounds(40,210,200,20);
        accountCreator.add(newPasswordLabel);
-       
+       //name settings and positioning
+       name = new JTextField();
+       name.setBounds(290,130,300,20);
+       name.setHorizontalAlignment(JTextField.RIGHT);
+       accountCreator.add(name);
+       //newUsername settings and positioning
+       newUsername = new JTextField();
+       newUsername.setBounds(290,170,300,20);
+       newUsername.setHorizontalAlignment(JTextField.RIGHT);
+       accountCreator.add(newUsername);
+       //newPassword settings and positioning
+       newPassword = new JTextField();
+       newPassword.setBounds(290,210,300,20);
+       newPassword.setHorizontalAlignment(JTextField.RIGHT);
+       accountCreator.add(newPassword);
+       //errorLabel settings and positioning
+       Font font2 = new Font("Arial",Font.PLAIN,9);
+       requiredQuestionLabel1 = new JLabel("Required Question!");
+       requiredQuestionLabel1.setBounds(600,130,100,20);
+       requiredQuestionLabel1.setFont(font2);
+       requiredQuestionLabel1.setForeground(Color.RED);
+       accountCreator.add(requiredQuestionLabel1);
     }
 
 }
