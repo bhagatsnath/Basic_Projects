@@ -10,8 +10,10 @@ import java.nio.file.*;
 import java.util.List;
 
 public class Nath_ToolKit {
+//loginFrame objects
 JFrame loginFrame;
-JLabel welcome;
+JDialog accountCreator;
+JLabel welcomeForLoginFrame;
 JLabel username;
 JTextField usernameEnter;
 JLabel password;
@@ -20,6 +22,22 @@ JLabel wrongDetails;
 JButton loginButton;
 JButton createAccountButton;
 List<String> listCredential;
+
+
+//accountCreator Objects
+JLabel nameLabel;
+JLabel name;
+JLabel welcomeForAccountCreator;
+JLabel newUsernameLabel;
+JLabel newPasswordLabel;
+JLabel confirmPasswordLabel;
+JLabel newUsername;
+JLabel newPassword;
+JLabel confirmPassword;
+JLabel requiredQuestionLabel1;
+JLabel requiredQuestionLabel2;
+JLabel requiredQuestionLabel3;
+
     public static void main(String[] args){
         new Nath_ToolKit();
     }
@@ -27,6 +45,7 @@ List<String> listCredential;
         int r = 120;
         int g = 199;
         int b = 245;
+        //loginFrame components
         //loginFrame settings and positioning
         loginFrame = new JFrame("Login to Access Toolkit");
         loginFrame.setSize(300,275);
@@ -35,12 +54,18 @@ List<String> listCredential;
         loginFrame.setLayout(null);
         loginFrame.getContentPane().setBackground(new Color(r,g,b));
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //welcome settings and positioning
-        welcome = new JLabel("Welcome to Nath Toolkit");
-        welcome.setBounds(10,10,290,30);
-        welcome.setHorizontalAlignment(JLabel.CENTER);
-        loginFrame.add(welcome);
+        //accountCreator settings and positioning
+        accountCreator = new JDialog(loginFrame,"Create a Toolkit Account");
+        accountCreator.setSize(700,600);
+        accountCreator.setResizable(false);
+        accountCreator.setLocationRelativeTo(null);
+        accountCreator.setLayout(null);
+        accountCreator.getContentPane().setBackground(new Color(r,g,b));
+        //welcomeForLoginFrame settings and positioning
+        welcomeForLoginFrame = new JLabel("Welcome to Nath Toolkit");
+        welcomeForLoginFrame.setBounds(10,10,290,30);
+        welcomeForLoginFrame.setHorizontalAlignment(JLabel.CENTER);
+        loginFrame.add(welcomeForLoginFrame);
         //username Settings and positioning
         username = new JLabel("Username: ");
         username.setBounds(35,70,75,20);
@@ -103,7 +128,41 @@ List<String> listCredential;
         loginFrame.add(loginButton);
         //createAccountButton settings and positioning
         createAccountButton = new JButton("Create an Account");
-        //createAccountButton.setBounds();
+        createAccountButton.setBounds(135, 200,125,20);
+        createAccountButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                loginFrame.setVisible(false);
+                accountCreator.setVisible(true);
+            }
+        });
+        loginFrame.add(createAccountButton);
         loginFrame.setVisible(true);
+
+
+
+
+       //accountCreator components 
+       //welcomeForAccountCreator settings and positioning
+       welcomeForAccountCreator = new JLabel();
+       Font font = new Font("Arial",Font.PLAIN,20);
+       welcomeForAccountCreator.setFont(font);
+       welcomeForAccountCreator.setText("Fill in the Following Blanks in order to Create an account with us");
+       welcomeForAccountCreator.setBounds(20,10,660,60);
+       welcomeForAccountCreator.setHorizontalAlignment(JLabel.CENTER);
+       accountCreator.add(welcomeForAccountCreator);
+       //newUsernameLabel settings and positioning
+       nameLabel = new JLabel("Enter Your Full Name");
+       nameLabel.setBounds(40,130,200,20);
+       accountCreator.add(nameLabel);
+       //newUsernameLabel settings and positioning
+       newUsernameLabel = new JLabel("Enter a new Username");
+       newUsernameLabel.setBounds(40,170,200,20);
+       accountCreator.add(newUsernameLabel);
+       //newPasswordLabel settings and positioning
+       newPasswordLabel = new JLabel("Enter a new Password");
+       newPasswordLabel.setBounds(40,210,200,20);
+       accountCreator.add(newPasswordLabel);
+       
     }
+
 }
