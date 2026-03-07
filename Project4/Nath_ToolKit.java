@@ -209,8 +209,9 @@ JButton createAccount;
        requiredQuestionLabel4.setForeground(Color.RED);
        //accountSucess settings and positioning
        accountSucess = new JLabel("Your Account has been Created! Close the Window to Log Back In");
-       accountSucess.setBounds(250,310,300,20);
+       accountSucess.setBounds(225,310,350,20);
        accountSucess.setFont(font2);
+       accountSucess.setHorizontalAlignment(JLabel.CENTER);
        accountSucess.setForeground(Color.GREEN);
        //createAccount button settings and positioning
        createAccount = new JButton("Create Account");
