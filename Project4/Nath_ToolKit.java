@@ -17,7 +17,7 @@ JLabel welcomeForLoginFrame;
 JLabel username;
 JTextField usernameEnter;
 JLabel password;
-JTextField passwordEnter;
+JPasswordField passwordEnter;
 JLabel wrongDetails;
 JButton loginButton;
 JButton createAccountButton;
@@ -32,11 +32,14 @@ JLabel newUsernameLabel;
 JLabel newPasswordLabel;
 JLabel confirmPasswordLabel;
 JTextField newUsername;
-JTextField newPassword;
-JTextField confirmPassword;
+JPasswordField newPassword;
+JPasswordField confirmPassword;
 JLabel requiredQuestionLabel1;
 JLabel requiredQuestionLabel2;
 JLabel requiredQuestionLabel3;
+JLabel requiredQuestionLabel4;
+JLabel accountSucess;
+JButton createAccount;
 
     public static void main(String[] args){
         new Nath_ToolKit();
@@ -56,7 +59,7 @@ JLabel requiredQuestionLabel3;
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //accountCreator settings and positioning
         accountCreator = new JDialog(loginFrame,"Create a Toolkit Account");
-        accountCreator.setSize(700,600);
+        accountCreator.setSize(750,600);
         accountCreator.setResizable(false);
         accountCreator.setLocationRelativeTo(null);
         accountCreator.setLayout(null);
@@ -80,7 +83,7 @@ JLabel requiredQuestionLabel3;
         usernameEnter.setHorizontalAlignment(JTextField.RIGHT);
         loginFrame.add(usernameEnter);
         //passwordEnter settings and positioning
-        passwordEnter = new JTextField();
+        passwordEnter = new JPasswordField();
         passwordEnter.setBounds(135,110,125,20);
         passwordEnter.setHorizontalAlignment(JTextField.RIGHT);
         loginFrame.add(passwordEnter);
@@ -95,7 +98,7 @@ JLabel requiredQuestionLabel3;
         loginButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String usernameDetect = (usernameEnter.getText()).replace(" ", "");
-                String passwordDetect = passwordEnter.getText();
+                String passwordDetect = new String(passwordEnter.getPassword());
                 boolean usernameVerified = false;
                 boolean passwordVerified = false;
                 try{
@@ -128,7 +131,7 @@ JLabel requiredQuestionLabel3;
         loginFrame.add(loginButton);
         //createAccountButton settings and positioning
         createAccountButton = new JButton("Create an Account");
-        createAccountButton.setBounds(135, 200,125,20);
+        createAccountButton.setBounds(135, 210,125,20);
         createAccountButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 accountCreator.setVisible(true);
@@ -161,6 +164,10 @@ JLabel requiredQuestionLabel3;
        newPasswordLabel = new JLabel("Enter a new Password");
        newPasswordLabel.setBounds(40,210,200,20);
        accountCreator.add(newPasswordLabel);
+       //confirmPasswordLabel settings and positioning
+       confirmPasswordLabel = new JLabel("Confirm Your Password");
+       confirmPasswordLabel.setBounds(40,250,200,20);
+       accountCreator.add(confirmPasswordLabel);
        //name settings and positioning
        name = new JTextField();
        name.setBounds(290,130,300,20);
@@ -172,17 +179,102 @@ JLabel requiredQuestionLabel3;
        newUsername.setHorizontalAlignment(JTextField.RIGHT);
        accountCreator.add(newUsername);
        //newPassword settings and positioning
-       newPassword = new JTextField();
+       newPassword = new JPasswordField();
        newPassword.setBounds(290,210,300,20);
        newPassword.setHorizontalAlignment(JTextField.RIGHT);
        accountCreator.add(newPassword);
+       //confirmPassword settings and positioning
+       confirmPassword = new JPasswordField();
+       confirmPassword.setBounds(290,250,300,20);
+       confirmPassword.setHorizontalAlignment(JTextField.RIGHT);
+       accountCreator.add(confirmPassword);
+
        //errorLabel settings and positioning
-       Font font2 = new Font("Arial",Font.PLAIN,9);
-       requiredQuestionLabel1 = new JLabel("Required Question!");
-       requiredQuestionLabel1.setBounds(600,130,100,20);
+       Font font2 = new Font("Arial",Font.PLAIN,10);
+       requiredQuestionLabel1 = new JLabel();
+       requiredQuestionLabel1.setBounds(600,130,150,20);
        requiredQuestionLabel1.setFont(font2);
        requiredQuestionLabel1.setForeground(Color.RED);
-       accountCreator.add(requiredQuestionLabel1);
+       requiredQuestionLabel2 = new JLabel();
+       requiredQuestionLabel2.setBounds(600,170,150,20);
+       requiredQuestionLabel2.setFont(font2);
+       requiredQuestionLabel2.setForeground(Color.RED);
+       requiredQuestionLabel3 = new JLabel();
+       requiredQuestionLabel3.setBounds(600,210,150,20);
+       requiredQuestionLabel3.setFont(font2);
+       requiredQuestionLabel3.setForeground(Color.RED);
+       requiredQuestionLabel4 = new JLabel();
+       requiredQuestionLabel4.setFont(font2);
+       requiredQuestionLabel4.setBounds(600,250,150,20);
+       requiredQuestionLabel4.setForeground(Color.RED);
+       //accountSucess settings and positioning
+       accountSucess = new JLabel("Your Account has been Created! Close the Window to Log Back In");
+       accountSucess.setBounds(250,310,300,20);
+       accountSucess.setFont(font2);
+       accountSucess.setForeground(Color.GREEN);
+       //createAccount button settings and positioning
+       createAccount = new JButton("Create Account");
+       createAccount.setBounds(300,350,200,20);
+       createAccount.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            requiredQuestionLabel1.setText("Required Question!");
+            requiredQuestionLabel2.setText("Required Question!");
+            requiredQuestionLabel3.setText("Required Question!");
+            requiredQuestionLabel4.setText("Required Question!");
+            accountCreator.remove(requiredQuestionLabel1);
+            accountCreator.remove(requiredQuestionLabel2);
+            accountCreator.remove(requiredQuestionLabel3);
+            accountCreator.remove(requiredQuestionLabel4);
+            accountCreator.repaint();
+            String newName = name.getText();
+            String newUser = newUsername.getText();
+            String newPass = new String(newPassword.getPassword());
+            String confPass = new String(confirmPassword.getPassword());
+            if (newName.isBlank()){
+                accountCreator.add(requiredQuestionLabel1);
+                accountCreator.repaint();
+            }
+            if (newUser.isBlank()){
+                accountCreator.add(requiredQuestionLabel2);
+                accountCreator.repaint();
+            }
+            if (newPass.isBlank()){
+                accountCreator.add(requiredQuestionLabel3);
+                accountCreator.repaint();
+            }
+            if (confPass.isBlank()){
+                accountCreator.add(requiredQuestionLabel4);
+                accountCreator.repaint();
+            }
+            if (!newName.isBlank()&&!newUser.isBlank()&&!newPass.isBlank()&&!confPass.isBlank()){
+                if (newUser.contains(" ")){
+                    requiredQuestionLabel2.setText("No Spaces!");
+                    accountCreator.add(requiredQuestionLabel2);
+                    accountCreator.repaint();
+                }
+                if (!newPass.equals(confPass)){
+                    requiredQuestionLabel4.setText("Passwords Do Not Match!");
+                    newPassword.setText("");
+                    confirmPassword.setText("");
+                    accountCreator.add(requiredQuestionLabel4);
+                    accountCreator.repaint();
+                }
+                if (!newUser.contains(" ")&&newPass.equals(confPass)){
+                    String credentialLine = "\n"+newName+","+newUser+","+newPass;
+                    try{
+                        Files.write(Paths.get("project4Data.txt"), credentialLine.getBytes(), StandardOpenOption.APPEND);
+                    }
+                    catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+                    accountCreator.add(accountSucess);
+                    createAccount.setEnabled(false);
+                    accountCreator.repaint();
+                }
+            }
+        }
+       });
+       accountCreator.add(createAccount);
     }
 
 }
