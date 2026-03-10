@@ -24,6 +24,7 @@ public class Interface extends Canvas implements ActionListener{
     static JFrame mainFrame;
     static JTextField timeField;
     static JButton dock;
+    static JTextField nameField;
     //colors variables
     static int r;
     static int g;
@@ -48,10 +49,10 @@ public class Interface extends Canvas implements ActionListener{
     static JButton UConverter;
     static JButton guessGame;
 
-    public static void initialize(){
-        new Interface();
+    public static void initialize(String user){
+        new Interface(user);
     }
-    public Interface(){
+    public Interface(String user){
         r = 120;
         g = 199;
         b = 245;
@@ -83,6 +84,14 @@ public class Interface extends Canvas implements ActionListener{
         timeSet.setInitialDelay(0);
         timeSet.start();
         mainFrame.add(timeField);
+        //---------------------------------------------------------------------------------------------
+        //nameField settings and positioning
+        nameField = new JTextField();
+        nameField.setBounds(1350,10,220,20);
+        nameField.setHorizontalAlignment(JTextField.CENTER);
+        nameField.setEditable(false);
+        nameField.setText("Welcome, "+user);
+        mainFrame.add(nameField);
         //---------------------------------------------------------------------------------------------
         //About button settings and positioning
         about = new JButton("About");
@@ -146,6 +155,7 @@ public class Interface extends Canvas implements ActionListener{
             }
         });
         //---------------------------------------------------------------------------------------------
+        
         //---------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------
 

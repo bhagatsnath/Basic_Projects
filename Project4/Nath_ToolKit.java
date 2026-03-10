@@ -107,9 +107,10 @@ JButton createAccount;
                 catch(Exception ex){
                     ex.printStackTrace();
                 }
+                String[] credentials = new String[3];
                 for (int i = 0; i<listCredential.size();i++){
                     String userDetails = listCredential.get(i);
-                    String[] credentials = userDetails.split(",");
+                    credentials = userDetails.split(",");
                     if (credentials[1].equals(usernameDetect)){
                         usernameVerified = true;
                         if (credentials[2].equals(passwordDetect)){
@@ -120,7 +121,7 @@ JButton createAccount;
                 }
                 if (passwordVerified&&usernameVerified){
                     loginFrame.setVisible(false);
-                    Interface.initialize();
+                    Interface.initialize(credentials[0]);
                 }
                 else{
                     loginFrame.add(wrongDetails);
