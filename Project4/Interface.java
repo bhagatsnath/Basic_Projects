@@ -25,6 +25,7 @@ public class Interface extends Canvas implements ActionListener{
     static JTextField timeField;
     static JButton dock;
     static JTextField nameField;
+    static JButton logout;
     //colors variables
     static int r;
     static int g;
@@ -87,11 +88,40 @@ public class Interface extends Canvas implements ActionListener{
         //---------------------------------------------------------------------------------------------
         //nameField settings and positioning
         nameField = new JTextField();
-        nameField.setBounds(1350,10,220,20);
+        nameField.setBounds(1350,10,230,20);
         nameField.setHorizontalAlignment(JTextField.CENTER);
         nameField.setEditable(false);
         nameField.setText("Welcome, "+user);
         mainFrame.add(nameField);
+        //---------------------------------------------------------------------------------------------
+        //logout settings and positioning
+        logout = new JButton("Logout");
+        logout.setBounds(1280,10,60,20);
+        logout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                JDialog confirmFrame = new JDialog(mainFrame,"Confirmation");
+                confirmFrame.setSize(300,100);
+                confirmFrame.setLocationRelativeTo(null);
+                confirmFrame.setLayout(null);
+                confirmFrame.getContentPane().setBackground(new Color(r,g,b));
+                confirmFrame.setResizable(false);
+                JLabel statement = new JLabel("Are you Sure You want to Logout");
+                statement.setBounds(10,10,280,20);
+                statement.setHorizontalAlignment(JLabel.CENTER);
+                confirmFrame.add(statement);
+                JButton confirmButton = new JButton("Yes");
+                confirmButton.setBounds(130,40,40,20);
+                confirmButton.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        mainFrame.dispose();
+                        Nath_ToolKit.main(new String[0]);
+                    }
+                });
+                confirmFrame.add(confirmButton);
+                confirmFrame.setVisible(true);
+            }
+        });
+        mainFrame.add(logout);
         //---------------------------------------------------------------------------------------------
         //About button settings and positioning
         about = new JButton("About");
