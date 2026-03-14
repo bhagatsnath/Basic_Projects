@@ -108,6 +108,7 @@ JButton createAccount;
                     ex.printStackTrace();
                 }
                 String[] credentials = new String[3];
+                int indexOfCredential = 0;
                 for (int i = 0; i<listCredential.size();i++){
                     String userDetails = listCredential.get(i);
                     credentials = userDetails.split(",");
@@ -115,13 +116,14 @@ JButton createAccount;
                         usernameVerified = true;
                         if (credentials[2].equals(passwordDetect)){
                             passwordVerified = true;
+                            indexOfCredential = i;
                             break;
                         }
                     }
                 }
                 if (passwordVerified&&usernameVerified){
                     loginFrame.setVisible(false);
-                    Interface.initialize(credentials[0]);
+                    Interface.initialize(credentials,indexOfCredential);
                 }
                 else{
                     loginFrame.add(wrongDetails);

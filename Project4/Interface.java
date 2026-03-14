@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.*;
 import java.time.format.*;
+import java.nio.file.*;
+import java.util.List;
 
 import javax.swing.*;
 public class Interface extends Canvas implements ActionListener{
@@ -26,6 +28,7 @@ public class Interface extends Canvas implements ActionListener{
     static JButton dock;
     static JTextField nameField;
     static JButton logout;
+    static JButton deleteAccount;
     //colors variables
     static int r;
     static int g;
@@ -50,10 +53,10 @@ public class Interface extends Canvas implements ActionListener{
     static JButton UConverter;
     static JButton guessGame;
 
-    public static void initialize(String user){
-        new Interface(user);
+    public static void initialize(String[]details, int indexOfCredential){
+        new Interface(details,indexOfCredential);
     }
-    public Interface(String user){
+    public Interface(String[] details, int indexOfCredential){
         r = 120;
         g = 199;
         b = 245;
@@ -91,7 +94,7 @@ public class Interface extends Canvas implements ActionListener{
         nameField.setBounds(1350,10,230,20);
         nameField.setHorizontalAlignment(JTextField.CENTER);
         nameField.setEditable(false);
-        nameField.setText("Welcome, "+user);
+        nameField.setText("Welcome, "+details[0]);
         mainFrame.add(nameField);
         //---------------------------------------------------------------------------------------------
         //logout settings and positioning
@@ -122,6 +125,80 @@ public class Interface extends Canvas implements ActionListener{
             }
         });
         mainFrame.add(logout);
+        //---------------------------------------------------------------------------------------------
+        //deleteAccount settings and positioning
+        deleteAccount = new JButton("Delete Account");
+        deleteAccount.setBounds(1150,10,120,20);
+        deleteAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                JDialog confirmFrame = new JDialog(mainFrame,"Confirmation");
+                confirmFrame.setSize(400,100);
+                confirmFrame.setLocationRelativeTo(null);
+                confirmFrame.setLayout(null);
+                confirmFrame.setResizable(false);
+                confirmFrame.getContentPane().setBackground(new Color(r,g,b));
+                JLabel statement = new JLabel("Are you Sure you want to Delete Your Toolkit Account");
+                statement.setBounds(10,10,380,20);
+                statement.setHorizontalAlignment(JLabel.CENTER);
+                confirmFrame.add(statement);
+                JButton confirmButton = new JButton("Yes");
+                confirmButton.setBounds(180,40,40,20);
+                confirmButton.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent ee){
+                        confirmFrame.setVisible(false);
+                        JDialog verifyFrame = new JDialog();
+                        verifyFrame.setSize(300,200);
+                        verifyFrame.setLocationRelativeTo(null);
+                        verifyFrame.setLayout(null);
+                        verifyFrame.setResizable(false);
+                        verifyFrame.getContentPane().setBackground(new Color(r,g,b));
+                        JLabel statement2 = new JLabel("Enter Your Password For Confirmation");
+                        statement2.setBounds(10,10,280,20);
+                        statement2.setHorizontalAlignment(JLabel.CENTER);
+                        verifyFrame.add(statement2);
+                        JPasswordField verifyField = new JPasswordField();
+                        verifyField.setBounds(50,40,200,20);
+                        verifyField.setHorizontalAlignment(JTextField.RIGHT);
+                        verifyFrame.add(verifyField);
+                        JButton verifyButton = new JButton("Delete Account");
+                        verifyButton.setBounds(50,110,200,20);
+                        verifyButton.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent eee){
+                                String passVerify = new String(verifyField.getPassword());
+                                if (passVerify.equals(details[2])){
+                                    verifyFrame.setVisible(false);
+                                    Path path = Paths.get("project4Data.txt");
+                                    try{
+                                        List<String> credentials = Files.readAllLines(path);
+                                        credentials.remove(indexOfCredential);
+                                        credentials.removeIf(line -> line.trim().isEmpty());
+                                        String content = String.join(System.lineSeparator(),credentials);
+                                        Files.writeString(path,content);
+                                        mainFrame.dispose();
+                                        Nath_ToolKit.main(new String[0]);
+                                    }
+                                    catch(Exception ex){
+                                        ex.printStackTrace();
+                                    }
+                                }
+                                else {
+                                    JLabel incorrectPassword = new JLabel("Incorrect Password");
+                                    incorrectPassword.setBounds(50,75,200,20);
+                                    incorrectPassword.setHorizontalAlignment(JLabel.CENTER);
+                                    incorrectPassword.setForeground(Color.RED);
+                                    verifyFrame.add(incorrectPassword);
+                                }
+                            }
+                        });
+                        verifyFrame.add(verifyButton);
+                        verifyFrame.setVisible(true);
+                    }
+                });
+                confirmFrame.add(confirmButton);
+                confirmFrame.setVisible(true);
+            }
+        });
+        mainFrame.add(deleteAccount);
         //---------------------------------------------------------------------------------------------
         //About button settings and positioning
         about = new JButton("About");
