@@ -1,3 +1,4 @@
-Bhagat,bhagat1,123456
 Alice,alice1,999999
 Bob,bob99,555555
+Bhagat Sabari Nath,bhagat1,123456
+Charlie,charlie1,charlie99

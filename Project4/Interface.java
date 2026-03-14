@@ -187,6 +187,7 @@ public class Interface extends Canvas implements ActionListener{
                                     incorrectPassword.setHorizontalAlignment(JLabel.CENTER);
                                     incorrectPassword.setForeground(Color.RED);
                                     verifyFrame.add(incorrectPassword);
+                                    verifyFrame.repaint();
                                 }
                             }
                         });
